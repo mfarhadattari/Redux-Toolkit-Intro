@@ -9,6 +9,12 @@ import { useAppDispatch, useAppSelector } from "./redux/hooks";
 const App = () => {
   const dispatch = useAppDispatch();
   const { count } = useAppSelector((state) => state.counter);
+
+  const array = [];
+  for (let i = 1; i <= Math.floor(count / 5); i++) {
+    array.push(i);
+  }
+
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="flex flex-col items-center bg-gray-100 w-fit h-fit p-5 rounded-lg">
@@ -41,6 +47,11 @@ const App = () => {
           >
             Increment by 5
           </button>
+        </div>
+        <div className="flex gap-2 mt-5">
+          {array.map((el) => (
+            <span key={el} className="border w-3 h-3 bg-slate-950" />
+          ))}
         </div>
       </div>
     </div>
