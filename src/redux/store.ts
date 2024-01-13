@@ -1,14 +1,16 @@
-import { Middleware, configureStore } from "@reduxjs/toolkit";
-import logger from "redux-logger";
+import { configureStore } from "@reduxjs/toolkit";
+import { baseApi } from "./apis/api";
 import counterReducer from "./features/counterSlice";
-import MyLogger from "./middlewares/MyLogger";
 
 const store = configureStore({
   reducer: {
+    [baseApi.reducerPath]: baseApi.reducer,
     counter: counterReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(logger as Middleware, MyLogger),
+    getDefaultMiddleware().concat(baseApi.middleware),
+  /* middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(logger as Middleware, MyLogger), */
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
